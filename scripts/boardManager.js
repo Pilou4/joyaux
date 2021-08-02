@@ -7,7 +7,8 @@
 function loadTiles() 
 {
     const speed = 25; 
-    let delay = 0; 
+    let delay = 0;
+    let count = 0;
     const tileSize = 60; 
     for (let line = 0; line < 9; line++) 
     { 
@@ -15,8 +16,7 @@ function loadTiles()
         { 
         ( 
       (line, column) => { 
-                        let count = 0;
-                        let theType = parseInt(1 + (Math.random() * 7));
+                        let theType = parseInt(1 + (Math.random() * numberOfTypes));
                         delay = (9 - line) * 3 + column;
                         const tile = $('<img draggable="false" class="tile" data-id="' + line + '-' + column + '" data-index="' + (count++) + '" src="images/stone-' + theType + '.png">')
                               .css ( 
@@ -26,11 +26,24 @@ function loadTiles()
                                      } 
                                    ); 
                         $('.tileZone').append(tile);
-                        animateTile(tile, delay++, speed, (line * tileSize));  
+                        animateTile(tile, delay++, speed, (line * tileSize));
+                        let newTile = {}; 
+                        // coords : un objet pour stocker les coordonnées de la tuile dans la grille de l’aire de jeu dans ses propriétés..left et .top.
+                        newTile.coords = {left: column, top: line};
+                        // neighbours : un objet pour retrouver facilement les tuiles voisines directes d’une tuile.
+                        newTile.neighbours = {};
+                        // type : le type de la tuile.
+                        newTile.type  = theType;
+                        // tile : l’élément HTML <img> figurant dans le DOM et représentant graphiquement la tuile.
+                        newTile.tile = tile;
+                        // index : le numéro d’ordre de la tuile dans le jeu, son identifiant.
+                        newTile.index = count - 1; 
+                        tiles.push(newTile);  
                   } 
            ) (line, column); 
       } 
-    } 
+    }
+    organizeTiles() 
 }
 
 // Animation faisant tombé les tuiles par le haut de l'écran.
