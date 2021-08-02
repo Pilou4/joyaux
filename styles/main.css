@@ -89,3 +89,19 @@ body
     display: flex; 
     position: relative; 
 } 
+
+.tile 
+{ 
+    width: 56px; 
+    height: 56px; 
+    position: absolute !important; 
+    cursor: pointer; 
+    box-shadow: 0 0 12px 1px grey; 
+    background: silver; 
+    border: solid 2px black; 
+} 
+ 
+.tile:hover 
+{ 
+    filter: brightness(1.35); 
+} 
