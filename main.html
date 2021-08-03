@@ -1,33 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css2?family=Julee&display=swap" rel="stylesheet"> 
-        <link rel="stylesheet" type="text/css" href="styles/normalize.css" /> 
-        <link rel="stylesheet" type="text/css" href="styles/main.css" /> 
-        <script src="scripts/jquery-3.1.1.min.js"></script> 
-        <script src="scripts/boardManager.js"></script> 
-        <script src="scripts/gameEngine.js"></script>
-        <script src="scripts/main.js"></script> 
-        <title>Joyaux</title>
-    </head>
+<html lang="fr">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="https://fonts.googleapis.com/css2?family=Julee&display=swap" rel="stylesheet"> 
+      <link rel="stylesheet" type="text/css" href="styles/normalize.css" /> 
+      <link rel="stylesheet" type="text/css" href="styles/main.css" /> 
+      <script src="scripts/jquery-3.1.1.min.js"></script> 
+      <script src="scripts/boardManager.js"></script> 
+      <script src="scripts/gameEngine.js"></script>
+      <script src="scripts/specialTileManager.js"></script>
+      <script src="scripts/scoreManager.js"></script> 
+      <script src="scripts/soundManager.js"></script>
+      <script src="scripts/main.js"></script> 
+      <title>Joyaux</title>
+  </head>
     <body>
-        <div class="mainContainer"> 
-            <div class="headerZone"> 
-                <label class="gameTitle">P&nbsp;&nbsp;L&nbsp;&nbsp;U&nbsp;&nbsp;I&nbsp;&nbsp;E&nbsp; &nbsp;&nbsp;&nbsp;D&nbsp;&nbsp;E&nbsp;&nbsp;&nbsp;&nbsp;P&nbsp;&nbsp;I&nbsp;&nbsp;E&nbsp;&nbsp;R&nbsp;&nbsp;R&nbsp;&nbsp;E&nbsp;&nbsp;S&nbsp;&nbsp;&nbsp;&nbsp;P&nbsp;&nbsp;R&nbsp;&nbsp;E&nbsp;&nbsp;C&nbsp;&nbsp;I&nbsp;&nbsp;E&nbsp;&nbsp;U&nbsp;&nbsp;S&nbsp;&nbsp;E&nbsp;&nbsp;S</label> 
-            </div> 
-            <div class="gameZone"> 
-                <div class="infoZone cache"> 
-                    <label id="playerScore">0000000000</label> 
-                    <label id="goalLevel"></label> 
-                </div> 
-                <div class="gameBoard cache"> 
-                    <div class="tileZone"></div> 
-                </div> 
-            </div> 
-            <div class="statusZone"></div> 
-        </div> 
+      <audio id="musicSlot"><source type="audio/mpeg"></audio>
+      <audio id="soundHover"><source src="sounds/hover.mp3" type="audio/mpeg"></audio>
+      <audio id="soundCrash"><source src="sounds/crash.mp3" type="audio/mpeg"></audio>
+      <audio id="soundFail"><source src="sounds/fail.mp3" type="audio/mpeg"></audio>
+      <audio id="soundBang"><source src="sounds/bang.mp3" type="audio/mpeg"></audio>
+      <audio id="soundBonus"><source src="sounds/bonusPoints.mp3" type="audio/mpeg"></audio>
+      <audio id="soundTime"><source src="sounds/time.mp3" type="audio/mpeg"></audio>
+      <audio id="soundLevelUp"><source src="sounds/levelUp.mp3" type="audio/mpeg"></audio>
+      <audio id="soundWhoosh"><source src="sounds/whoosh.mp3" type="audio/mpeg"></audio>
+      <audio id="soundLevelFail"><source src="sounds/levelFail.mp3" type="audio/mpeg"></audio>
+      <audio id="soundShortDing"><source src="sounds/shortDing.mp3" type="audio/mpeg"></audio>
+      <audio id="soundDing"><source src="sounds/ding.mp3" type="audio/mpeg"></audio>
+      <audio id="soundRocket"><source src="sounds/rocket.mp3" type="audio/mpeg"></audio>
+      <div class="mainContainer">
+        <div class="headerZone">
+          <label class="gameTitle">P&nbsp;&nbsp;L&nbsp;&nbsp;U&nbsp;&nbsp;I&nbsp;&nbsp;E&nbsp;&nbsp;&nbsp;&nbsp;D&nbsp;&nbsp;E&nbsp;&nbsp;&nbsp;&nbsp;P&nbsp;&nbsp;I&nbsp;&nbsp;E&nbsp;&nbsp;R&nbsp;&nbsp;R&nbsp;&nbsp;E&nbsp;&nbsp;S&nbsp;&nbsp;&nbsp;&nbsp;P&nbsp;&nbsp;R&nbsp;&nbsp;E&nbsp;&nbsp;C&nbsp;&nbsp;I&nbsp;&nbsp;E&nbsp;&nbsp;U&nbsp;&nbsp;S&nbsp;&nbsp;E&nbsp;&nbsp;S</label>
+        </div>
+        <div class="gameZone">
+          <div class="infoZone cache">
+            <label id="playerScore">0000000000</label>
+            <label id="goalLevel"></label>
+          </div>
+          <div class="gameBoard cache">
+            <div class="tileZone"></div>
+            <div class="timeBar">
+              <div class="timeBarValue"></div>
+            </div>
+            <label id="comboLabel"></label>
+          </div>
+          <div class="mainPanel">
+            <div class="mainPanelContainer">
+              <div class="menuPanel">
+                <p class="explainGame">Vous devez nettoyer l'aire de jeu en éliminant les pierres précieuses qui s'y trouvent.</p>
+                <p class="explainGame">Seuls les blocs contenant au moins trois pierres de même type peuvent être supprimés. Il suffit de cliquer sur une des pierres pour supprimer tout le bloc qui la contient. Plus le bloc contient de pierres, plus grand est le nombre de points qu'il rapporte.</p>
+                <p class="explainGame">Lorsqu'une pierre est supprimée de l'aire de jeu, la case sur laquelle elle était placée se trouve libérée. Au commencement de chaque niveau, un but à atteindre en termes de cases à libérer, de nombre de coups disponibles et de temps imparti est indiqué.</p>
+                <p class="explainGame">Lorsque le contrat est atteint, un bonus est accordé et le niveau suivant est proposé.</p>
+                <p class="explainGame">Si le nombre de coups restants atteint 0 ou si le temps imparti est écoulé avant que la totalité des cases requises soient libérées, la partie est terminée.</p>
+                <div class="gameOptions">
+                  <div>
+                    <label>Musique 100</label><img src="images/HPMinus.png" class="gameLink" data-cmd="musicVolumeDown">
+                    <img src="images/HPPlus.png" class="gameLink" data-cmd="musicVolumeUp">
+                  </div>
+                  <div>
+                    <label>Effets 100</label><img src="images/HPMinus.png" class="gameLink" data-cmd="soundVolumeDown">
+                    <img src="images/HPPlus.png" class="gameLink" data-cmd="soundVolumeUp">
+                  </div>
+                </div>
+                    <label class="gameLink" data-cmd="startGame">Démarrer la partie</label>
+              </div>
+              <div class="levelPanel cache">
+                <label class="levelTitle"></label>
+                <p class="explainGoalLevel"></p>
+              </div>	
+              <div class="bonusPanel cache">
+                <p class="explainGame"></p>
+              </div>
+              <div class="gameOverPanel cache">
+                <p class="gameOver">GAME OVER</p>
+                <p class="explainGame"></p>
+                <label class="gameLink" data-cmd="goToMenu">Retourner à l'accueil</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="statusZone"></div>
+      </div>
     </body>
 </html>
