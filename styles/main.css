@@ -4,7 +4,6 @@ html
     height: 100%;
     line-height: 0;
 }
-
 body
 {
     width: 100%;
@@ -13,13 +12,11 @@ body
     color: white;
     overflow: hidden;
 }
-
 .mainContainer
 {
     width: 100%;
     height: 100%;
 }
-
 .headerZone
 {
     width: 100%;
@@ -32,14 +29,12 @@ body
     display: flex;
     flex-direction: column;
 }
-
 .gameTitle
 {
     flex-grow: 1;
-    line-height: 1;
+    line-height: 2;
     text-align: center;
 }
-
 .toolZone 
 {
     width: 100%;
@@ -49,7 +44,6 @@ body
     border-top: solid 2px white;
     border-radius: 40%;
 }
-
 .gameZone
 {
     width: 100%;
@@ -59,7 +53,6 @@ body
     justify-content: center;
     flex-direction: column;
 }
-
 .gameBoard
 {
     margin: 17px;
@@ -69,7 +62,6 @@ body
     background: radial-gradient(royalblue, black);
     position: relative;
 }
-
 .infoZone 
 {
     line-height: 1;
@@ -77,18 +69,15 @@ body
     margin-top: -46px;
 }
 
-
 #playerScore 
 {
     font-size: 300%;
     display: block;
 }
-
 #goalLevel
 {
     font-size: 140%;
 }
-
 .tileZone
 {
     border: solid 2px white;
@@ -98,7 +87,6 @@ body
     display: flex;
     position: relative;
 }
-
 .tile
 {
     width: 56px;
@@ -109,12 +97,10 @@ body
     background: silver;
     border: solid 2px black;
 }
-
 .tile:hover
 {
     filter: brightness(1.35);
 }
-
 .explosion
 {
     width: 58px;
@@ -123,13 +109,11 @@ body
     pointer-events: none;
     z-index: 2;
 }
-
 .usedTile
 {
     border: solid 2px transparent;
     background: none;
 }
-
 #comboLabel
 {
     position: absolute;
@@ -151,19 +135,17 @@ body
     text-align: center;
     width: 560px;
 }
-
 .mainPanel 
 {
     position: absolute;
     width: 70%;
-    height: 56%;
+    height: 75%;
     transition: all 1s;
     overflow: hidden;
-    top: 28%;
+    top: 15%;
     min-width: 800px;
     min-height: 450px;
 }
-
 .mainPanelContainer
 {
     width: 89%;
@@ -178,7 +160,6 @@ body
     border-radius: 10px;
     transition: all 1s;
 }
-
 .menuPanel
 {
     position: absolute;
@@ -187,7 +168,6 @@ body
     left: 3%;
     top: 5%;
 }
-
 .explainGame 
 {
     font-family: 'Julee';
@@ -197,12 +177,10 @@ body
     margin-block-start: .5em;
     margin-block-end: 0.5em;
 }
-
 .gameLink:hover
 {
     text-shadow: 2px 2px 4px grey;
 }
-
 .gameLink
 {
     font-size: 140%;
@@ -212,7 +190,6 @@ body
     color: black;
     cursor: pointer;
 }
-
 .levelTitle
 {
     font-family: 'Julee';
@@ -222,7 +199,6 @@ body
     top: 40px;
     left: 20px;
 }
-
 .explainGoalLevel
 {
     font-size: 200%;
@@ -233,7 +209,6 @@ body
     top: 130px;
     left: 14px;
 }
-
 .bonusPanel .explainGame 
 {
     top: 28%;
@@ -241,12 +216,10 @@ body
     left: 8%;
     font-size: 240%;
 }
-
 .cache
 {
     display: none;
 }
-
 .timeBar
 {
     width: 14px;
@@ -259,7 +232,6 @@ body
     right: -31px;
     box-shadow: 2px 2px 8px black;
 }
-
 .timeBarValue
 {
     width: 70%;
@@ -272,12 +244,10 @@ body
     filter: blur(2px);
     transition: background .4s linear;
 }
-
 .blink
 {
     animation:blinking .5s infinite;
 }
-
 @keyframes blinking
 {
     0%  {opacity: 1;}
@@ -286,7 +256,6 @@ body
     99% {opacity: 0;}
     100%{opacity: 1;}
 }
-
 .gameOverPanel
 {
     position: absolute;
@@ -295,7 +264,6 @@ body
     left: 3%;
     top: 5%;
 }
-
 .gameOver
 {
     font-size: 210%;
@@ -304,7 +272,6 @@ body
     color: black;
     margin-top: 20%;
 }
-
 .statusZone 
 {
     position: absolute;
@@ -312,7 +279,6 @@ body
     text-align: center;
     width: 100%;
 }
-
 .gameOptions
 {
     position: absolute;
@@ -324,12 +290,10 @@ body
     font-family: 'Julee';
     font-size: 130%;
 }
-
 .gameOptions div
 {
     display: inline;
 }
-
 .gameOptions div label
 {
     position: relative;
@@ -338,7 +302,6 @@ body
     text-align: center;
     display: inline-block;
 }
-
 .gameOptions div img
 {
     position: relative;
@@ -347,12 +310,10 @@ body
     filter: brightness(0.75);
     cursor: pointer;
 }
-
 .gameOptions div img:hover
 {
     filter: brightness(1);
 }
-
 #turnsLeft
 {
     color: black;
